@@ -1,59 +1,69 @@
 @use "mixins" as mixins;
 
-.currency-converter {
-    max-width: clamp(200px, 80%, 1000px);
-    margin: 2rem auto;
-    padding: 1rem 2rem;
-    position: relative;
-    border-radius: 4px;
+:host {
+    display: block;
+    padding: 2rem;
+    min-height: 100%;
 
-    @include mixins.media-query(300px) {
-        max-width: 90%;
-        margin: 1rem auto;
+    @include mixins.media-query(400px) {
         padding: 1rem;
     }
 
-    .form {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
+    .currency-converter {
+        max-width: clamp(300px, 80%, 1000px);
+        padding: 1rem 2rem;
+        position: relative;
+        border-radius: 4px;
+        margin: 0 auto;
 
-        @include mixins.media-query(900px) {
-            flex-direction: column;
-            align-items: flex-start;
+        @include mixins.media-query(450px) {
+            max-width: unset;
+            padding: 1rem;
         }
 
-        .amount-field {
-            width: 15rem;
-
-            @include mixins.media-query(1100px) {
-                width: 100%;
-            }
-        }
-
-        .symbols-field {
-            min-width: 20rem;
-
-            @include mixins.media-query(1100px) {
-                width: 100%;
-                min-width: unset;
-            }
-        }
-
-        .swap-button {
-            margin: 0 auto 20px;
+        .form {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
 
             @include mixins.media-query(900px) {
-                rotate: 90deg;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .amount-field {
+                width: 15rem;
+
+                @include mixins.media-query(1100px) {
+                    width: 100%;
+                }
+            }
+
+            .symbols-field {
+                min-width: 20rem;
+
+                @include mixins.media-query(1100px) {
+                    width: 100%;
+                    min-width: unset;
+                }
+            }
+
+            .swap-button {
+                margin: 0 auto 20px;
+
+                @include mixins.media-query(900px) {
+                    rotate: 90deg;
+                }
+            }
+
+            .mat-mdc-form-field-error {
+                font-size: 12px;
             }
         }
 
-        .mat-mdc-form-field-error {
-            font-size: 12px;
+        .error-message {
+            margin-top: 1rem;
         }
     }
-
-    .error-message {
-        margin-top: 1rem;
-    }
 }
+
