@@ -1,0 +1,5 @@
+<h2 class="heading">{{ payload.amount | currency: payload.baseCurrency : 'symbol-narrow' : '.2-6' }}
+    = {{ (payload.amount * payload.rate) | currency: payload.destinationCurrency : 'symbol-narrow' : '.2-6' }}</h2>
+
+<p>{{ 1 | currency: payload.baseCurrency : 'symbol-narrow': '.0-0' }}
+    = {{ payload.rate | currency: payload.destinationCurrency : 'symbol-narrow' : '.2-6' }}</p>

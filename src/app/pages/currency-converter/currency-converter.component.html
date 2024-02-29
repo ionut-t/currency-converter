@@ -1,0 +1,70 @@
+<section class="currency-converter mat-elevation-z4">
+    <h1 class="heading">Currency Converter</h1>
+
+    @if (loading()) {
+        <app-spinner />
+    }
+
+    <form class="form" [formGroup]="form">
+        <mat-form-field class="amount-field">
+            <mat-label>Amount</mat-label>
+            <input matInput
+                   type="number"
+                   inputmode="decimal"
+                   formControlName="amount">
+            @if (form.controls.from.value?.code; as currencyCode) {
+                <span matTextPrefix>{{ currencyCode | currencySymbol }}&nbsp;</span>
+            }
+            <mat-error>Please enter a value greater than or equal to 0.01</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="symbols-field">
+            <mat-label>From</mat-label>
+            <input aria-label="Select a base currency."
+                   matInput
+                   formControlName="from"
+                   [matAutocomplete]="from">
+            <mat-autocomplete #from="matAutocomplete"
+                              [displayWith]="displaySymbol"
+                              (optionSelected)="selectBaseCurrency($event.option.value)">
+                @for (option of baseSymbols$ | async; track option) {
+                    <mat-option [value]="option">{{ option.name }}</mat-option>
+                }
+            </mat-autocomplete>
+            <mat-error>Please select a base currency</mat-error>
+        </mat-form-field>
+
+        <button class="swap-button"
+                mat-mini-fab
+                color="primary"
+                aria-label="Swap currencies."
+                type="button"
+                (click)="swapCurrencies()">
+            <mat-icon>swap_horiz</mat-icon>
+        </button>
+
+        <mat-form-field class="symbols-field">
+            <mat-label>To</mat-label>
+            <input aria-label="Select a destination currency."
+                   matInput
+                   formControlName="to"
+                   [matAutocomplete]="to">
+            <mat-autocomplete #to="matAutocomplete"
+                              [displayWith]="displaySymbol"
+                              (optionSelected)="selectDestinationCurrency($event.option.value)">
+                @for (option of destinationSymbols$ | async; track option) {
+                    <mat-option [value]="option">{{ option.name }}</mat-option>
+                }
+            </mat-autocomplete>
+            <mat-error>Please select a destination currency</mat-error>
+        </mat-form-field>
+    </form>
+
+    @if (form.valid && (conversionPayload$ | async); as payload) {
+        <app-conversion-payload [payload]="payload" />
+    }
+
+    @if (error()) {
+        <app-error-message [error]="error()!" />
+    }
+</section>

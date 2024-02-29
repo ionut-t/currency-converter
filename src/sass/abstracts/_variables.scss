@@ -1,1 +1,23 @@
 $font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+
+:root {
+    // Font sizes
+    --fs-xs: 0.625rem; // 10px
+    --fs-sm: 0.75rem; // 12px
+    --fs-md: 0.875rem; // 14px
+    --fs-lg: 1.125rem; // 18px
+    --fs-xl: 1.25rem; // 20px
+
+    // Font Weights
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-bold: 700;
+}
+
+$font-sizes: (
+    xl: var(--fs-xl),
+    lg: var(--fs-lg),
+    md: var(--fs-md),
+    sm: var(--fs-sm),
+    xs: var(--fs-xs)
+);
